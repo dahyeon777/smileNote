@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "823990677004",
+    "project_id": "rootnote-bc454",
+    "storage_bucket": "rootnote-bc454.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823990677004:android:3f40bba960e7cc65df4829",
+        "android_client_info": {
+          "package_name": "com.dada.rootnote"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIBIjPR7TIVAZZWjWCFgFzECfx4n_qg4M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
