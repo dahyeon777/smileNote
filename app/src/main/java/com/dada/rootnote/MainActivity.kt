@@ -11,6 +11,8 @@ import com.dada.rootnote.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    lateinit var db : MemoDatabase
+    var memoList : List<MemoEntitiy> = listOf<MemoEntitiy>()
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,6 +21,9 @@ class MainActivity : AppCompatActivity() {
 
         val itemList = ArrayList<BoardItem>()
         val boardAdapter = BoardAdapter(itemList)
+
+        db = MemoDatabase.getInstance(this)!!
+
 
         itemList.add(BoardItem("오늘의 일기","12/24","오늘은 수박을 먹었다. 정말 맛있었다."))
         itemList.add(BoardItem("물놀이","01/23","오늘은 수영장에 갔다왔다"))
