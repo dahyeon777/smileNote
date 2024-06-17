@@ -18,6 +18,7 @@ class BoardAdapter(val itemList: ArrayList<BoardItem>) :
         holder.title.text = itemList[position].title
         holder.date.text = itemList[position].date
         holder.content.text = itemList[position].content
+        holder.time.text = itemList[position].time
     }
 
     override fun getItemCount(): Int {
@@ -29,5 +30,6 @@ class BoardAdapter(val itemList: ArrayList<BoardItem>) :
         val title = itemView.findViewById<TextView>(R.id.item_title)
         val date = itemView.findViewById<TextView>(R.id.item_date)
         val content = itemView.findViewById<TextView>(R.id.item_content)
+        val time = itemView.findViewById<TextView>(R.id.item_time)
     }
 }

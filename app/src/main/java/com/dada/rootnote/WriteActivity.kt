@@ -14,6 +14,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.LocalTime
 
 class WriteActivity : AppCompatActivity() {
 
@@ -32,15 +33,20 @@ class WriteActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveMemoToDatabase() {
 
-        val localDateTime: LocalDateTime = LocalDateTime.now()
+        val currentLocalTime: LocalTime = LocalTime.now()
+        val hour = currentLocalTime.hour
+        val minute = currentLocalTime.minute
+
+        val timeText = String.format("%02d:%02d", hour, minute)
 
         val localDate: LocalDate = LocalDate.now()
         val titleText = binding.titleTextView.text.toString()
         val contentText = binding.contentTextView.text.toString()
         val dateText = localDate.toString()
 
+
         // Memo 객체 생성
-        val memo = Memo(title = titleText, content = contentText, date = dateText)
+        val memo = Memo(title = titleText, content = contentText, date = dateText, time = timeText)
 
         // 데이터베이스에 Memo 객체 삽입
         val db = AppDatabase.getDatabase(application)

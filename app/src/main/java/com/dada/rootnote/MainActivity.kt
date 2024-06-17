@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             itemList.clear()
             memos?.let {
                 for (memo in it) {
-                    itemList.add(BoardItem(memo.title, memo.date, memo.content))
+                    itemList.add(BoardItem(memo.title, memo.date, memo.content, memo.time))
                 }
                 boardAdapter.notifyDataSetChanged()
             }
