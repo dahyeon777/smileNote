@@ -1,16 +1,13 @@
 package com.dada.rootnote
 
 import android.content.Intent
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dada.rootnote.databinding.ActivityMainBinding
-import java.time.LocalDate
-import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,23 +15,26 @@ class MainActivity : AppCompatActivity() {
     private lateinit var boardAdapter: BoardAdapter
     private lateinit var memoViewModel: MemoViewModel
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        memoViewModel = MemoViewModel(application)
+        // ViewModel 초기화
+        memoViewModel = ViewModelProvider(this).get(MemoViewModel::class.java)
 
+        // RecyclerView 설정
         val itemList = ArrayList<BoardItem>()
-        boardAdapter = BoardAdapter(itemList)
-        binding.rv.adapter = boardAdapter
-        binding.rv.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        binding.writeBtn.setOnClickListener {
+        boardAdapter = BoardAdapter(itemList) { clickedItem ->
+            // RecyclerView의 항목을 클릭했을 때의 동작
             val intent = Intent(this, WriteActivity::class.java)
+            intent.putExtra("title", clickedItem.title)
+            intent.putExtra("content", clickedItem.content)
             startActivity(intent)
         }
+        binding.rv.adapter = boardAdapter
+        binding.rv.layoutManager = LinearLayoutManager(this)
 
+        // ViewModel에서 데이터 변경 감지
         memoViewModel.getAllMemos().observe(this, Observer { memos ->
             itemList.clear()
             memos?.let {
@@ -44,5 +44,12 @@ class MainActivity : AppCompatActivity() {
                 boardAdapter.notifyDataSetChanged()
             }
         })
+
+        // 작성 버튼 클릭 시 WriteActivity로 이동
+        binding.writeBtn.setOnClickListener {
+            val intent = Intent(this, WriteActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
+

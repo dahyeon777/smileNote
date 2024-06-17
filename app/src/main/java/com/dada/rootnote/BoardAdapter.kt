@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BoardAdapter(val itemList: ArrayList<BoardItem>) :
+class BoardAdapter(val itemList: ArrayList<BoardItem>, private val onItemClick: (BoardItem) -> Unit) :
     RecyclerView.Adapter<BoardAdapter.BoardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardViewHolder {
@@ -15,21 +15,26 @@ class BoardAdapter(val itemList: ArrayList<BoardItem>) :
     }
 
     override fun onBindViewHolder(holder: BoardViewHolder, position: Int) {
-        holder.title.text = itemList[position].title
-        holder.date.text = itemList[position].date
-        holder.content.text = itemList[position].content
-        holder.time.text = itemList[position].time
+        val item = itemList[position]
+
+        holder.title.text = item.title
+        holder.date.text = item.date
+        holder.content.text = item.content
+        holder.time.text = item.time
+
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount(): Int {
-        return itemList.count()
+        return itemList.size
     }
 
-
     inner class BoardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title = itemView.findViewById<TextView>(R.id.item_title)
-        val date = itemView.findViewById<TextView>(R.id.item_date)
-        val content = itemView.findViewById<TextView>(R.id.item_content)
-        val time = itemView.findViewById<TextView>(R.id.item_time)
+        val title: TextView = itemView.findViewById(R.id.item_title)
+        val date: TextView = itemView.findViewById(R.id.item_date)
+        val content: TextView = itemView.findViewById(R.id.item_content)
+        val time: TextView = itemView.findViewById(R.id.item_time)
     }
 }
