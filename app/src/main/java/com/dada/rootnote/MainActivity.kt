@@ -1,12 +1,16 @@
 package com.dada.rootnote
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dada.rootnote.databinding.ActivityMainBinding
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var boardAdapter: BoardAdapter
     private lateinit var memoViewModel: MemoViewModel
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
