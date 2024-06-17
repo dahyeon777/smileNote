@@ -9,15 +9,15 @@ import androidx.room.Update
 @Dao
 interface MemoDAO {
     @Query("SELECT * FROM memo")
-    fun getAllMemo(): List<Memo>
+    fun getAllMemos(): List<Memo>
 
     @Insert
-    fun insertMemo(memo: Memo)
+    fun insertMemos(memo: Memo)
 
     @Update
-    fun updateMemo(memo: Memo)
+    fun updateMemos(memo: Memo)
 
     @Delete
-    fun deleteMemo(memo: Memo)
+    fun deleteMemos(memo: Memo)
 
 }

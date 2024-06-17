@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "memo")
 data class Memo(
     @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
     val id: Int = 0,
 
     @ColumnInfo(name = "title")
@@ -18,3 +19,4 @@ data class Memo(
     @ColumnInfo(name = "date")
     val date: String? = null
 )
+

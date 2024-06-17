@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.dada.rootnote.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -17,10 +18,21 @@ class MainActivity : AppCompatActivity() {
 
         val itemList = ArrayList<BoardItem>()
         val boardAdapter = BoardAdapter(itemList)
+        val db = AppDatabase.getDatabase(applicationContext)
 
-        itemList.add(BoardItem("오늘의 일기","12/24","오늘은 수박을 먹었다. 정말 맛있었다."))
-        itemList.add(BoardItem("물놀이","01/23","오늘은 수영장에 갔다왔다"))
-        itemList.add(BoardItem("놀이공원","01/23","오늘은 놀이공원에 갔다왔다"))
+        // 데이터베이스에서 Memo 데이터를 가져오기 위한 DAO 인스턴스
+        val memoDao = db?.MemoDAO()
+
+        // Memo 데이터를 가져와서 itemList에 추가
+        memoDao?.let {
+            val memos: List<Memo> = it.getAllMemos() // MemoDao에서 모든 Memo 데이터를 가져옴
+
+            for (memo in memos) {
+                itemList.add(BoardItem(memo.title, memo.date, memo.content))
+            }
+        }
+
+
         boardAdapter.notifyDataSetChanged()
 
         binding.rv.adapter = boardAdapter
