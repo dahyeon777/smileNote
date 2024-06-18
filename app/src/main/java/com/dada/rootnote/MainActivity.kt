@@ -1,8 +1,10 @@
 package com.dada.rootnote
 
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         boardAdapter = BoardAdapter(itemList) { clickedItem ->
             // RecyclerView의 항목을 클릭했을 때의 동작
             val intent = Intent(this, WriteActivity::class.java)
+            intent.putExtra("memoId", clickedItem.id) // 메모 ID 전달
             intent.putExtra("title", clickedItem.title)
             intent.putExtra("content", clickedItem.content)
             startActivity(intent)
@@ -39,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             itemList.clear()
             memos?.let {
                 for (memo in it) {
-                    itemList.add(BoardItem(memo.title, memo.date, memo.content, memo.time))
+                    itemList.add(BoardItem(memo.id, memo.title, memo.date, memo.content, memo.time)) // ID 추가
                 }
                 boardAdapter.notifyDataSetChanged()
             }
@@ -52,4 +55,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-

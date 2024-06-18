@@ -2,23 +2,22 @@ package com.dada.rootnote
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.dada.rootnote.AppDatabase
-import com.dada.rootnote.Memo
-import com.dada.rootnote.R
 import com.dada.rootnote.databinding.ActivityWriteBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
+import kotlin.properties.Delegates
 
 class WriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWriteBinding
-    private var memoId: Long = 0
+    private var memoId by Delegates.notNull<Long>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +41,6 @@ class WriteActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun saveOrUpdateMemo() {
-
         val currentLocalTime: LocalTime = LocalTime.now()
         val hour = currentLocalTime.hour
         val minute = currentLocalTime.minute
@@ -60,21 +58,16 @@ class WriteActivity : AppCompatActivity() {
         if (memoId == 0L) {
             // 새 메모 저장
             GlobalScope.launch(Dispatchers.IO) {
-                if (memoDao != null) {
-                    memoDao.insertMemos(memo)
-                }
+                memoDao?.insertMemos(memo)
             }
         } else {
             // 기존 메모 업데이트
-            memo.id = memoId.toInt()
+            memo.id = memoId.toLong()
             GlobalScope.launch(Dispatchers.IO) {
-                if (memoDao != null) {
-                    memoDao.updateMemos(memo)
-                }
+                memoDao?.updateMemos(memo)
             }
         }
 
         finish()
     }
 }
-

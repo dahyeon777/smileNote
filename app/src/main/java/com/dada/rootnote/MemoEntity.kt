@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "memo")
 data class Memo(
-    @PrimaryKey(autoGenerate = true) var id: Int = 0,
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
     @ColumnInfo(name = "title") var title: String = "",
     @ColumnInfo(name = "content") var content: String = "",
     @ColumnInfo(name = "date") var date: String = "",
