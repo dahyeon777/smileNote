@@ -25,17 +25,16 @@ class MainActivity : AppCompatActivity() {
 
         // RecyclerView 설정
         val itemList = ArrayList<BoardItem>()
-        boardAdapter = BoardAdapter(itemList, onItemClicked = { clickedItem ->
-            // RecyclerView의 항목을 클릭했을 때의 동작
-            val intent = Intent(this, WriteActivity::class.java)
-            intent.putExtra("memoId", clickedItem.id) // 메모 ID 전달
-            intent.putExtra("title", clickedItem.title)
-            intent.putExtra("content", clickedItem.content)
-            startActivity(intent)
-        }, onItemLongClicked = { longClickedItem ->
-            // RecyclerView의 항목을 길게 클릭했을 때의 동작 (삭제 다이얼로그 표시)
-            showDeleteConfirmationDialog(longClickedItem)
-        })
+        boardAdapter = BoardAdapter(itemList,
+            onItemClick = { clickedItem ->
+                // RecyclerView의 항목을 클릭했을 때의 동작
+                navigateToWriteActivity(clickedItem)
+            },
+            onItemLongClick = { longClickedItem ->
+                // RecyclerView의 항목을 길게 클릭했을 때의 동작 (삭제 다이얼로그 표시)
+                showDeleteConfirmationDialog(longClickedItem)
+            }
+        )
 
         binding.rv.adapter = boardAdapter
         binding.rv.layoutManager = LinearLayoutManager(this)
@@ -56,6 +55,15 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, WriteActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    // RecyclerView의 항목을 클릭했을 때의 동작
+    private fun navigateToWriteActivity(clickedItem: BoardItem) {
+        val intent = Intent(this, WriteActivity::class.java)
+        intent.putExtra("memoId", clickedItem.id) // 메모 ID 전달
+        intent.putExtra("title", clickedItem.title)
+        intent.putExtra("content", clickedItem.content)
+        startActivity(intent)
     }
 
     // 삭제 다이얼로그 표시

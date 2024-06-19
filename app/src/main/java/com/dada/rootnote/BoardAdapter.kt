@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 class BoardAdapter(
     private val itemList: List<BoardItem>,
-    private val onItemClicked: (BoardItem) -> Unit,
-    private val onItemLongClicked: (BoardItem) -> Unit
+    private val onItemClick: (BoardItem) -> Unit,
+    private val onItemLongClick: (BoardItem) -> Unit
 ) : RecyclerView.Adapter<BoardAdapter.BoardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardViewHolder {
@@ -28,12 +28,12 @@ class BoardAdapter(
 
         // 짧게 클릭한 경우의 이벤트 처리
         holder.itemView.setOnClickListener {
-            onItemClicked(item)
+            onItemClick(item)
         }
 
         // 길게 클릭한 경우의 이벤트 처리
         holder.itemView.setOnLongClickListener {
-            onItemLongClicked(item)
+            onItemLongClick(item)
             true // true를 반환하여 이벤트 처리 완료를 나타냄
         }
     }
