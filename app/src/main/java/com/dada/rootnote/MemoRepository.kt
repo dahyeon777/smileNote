@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 
 class MemoRepository(private val memoDao: MemoDAO) {
 
-    fun getAllMemos(): LiveData<List<Memo>> {
-        return memoDao.getAllMemos()
+    fun getAllMemosReverseOrder(): LiveData<List<Memo>> {
+        return memoDao.getAllMemosReverseOrder()
     }
 
     fun insertMemo(memo: Memo) {

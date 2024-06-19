@@ -20,7 +20,8 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:textColor="@color/white"
-                android:text="Memo"
+                android:text="MEMO"
+                android:textStyle="bold"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -40,23 +41,18 @@
 
         </LinearLayout>
 
-
         <Button
             android:id="@+id/writeBtn"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="32dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/circle_shape"
             android:text="+"
             android:textSize="40sp"
             android:textColor="#ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

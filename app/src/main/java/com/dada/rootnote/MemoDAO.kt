@@ -9,8 +9,8 @@ import androidx.room.Update
 @Dao
 interface MemoDAO {
 
-    @Query("SELECT * FROM memo")
-    fun getAllMemos(): LiveData<List<Memo>>
+    @Query("SELECT * FROM memo ORDER BY id DESC")
+    fun getAllMemosReverseOrder(): LiveData<List<Memo>>
 
     @Insert
     fun insertMemos(vararg memo: Memo)

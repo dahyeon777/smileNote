@@ -7,8 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="mainColor">#fff5cf</color>
-    <color name="pointColor">#d5f6f7</color>
-    <color name="gray">#5c5c5c</color>
+    <color name="textColor">#424242</color>
+    <!--<color name="pointColor">#d5f6f7</color>-->
+    <color name="pointColor">#9adfed</color>
+    <color name="gray">#707070</color>
     <!--<color name="pointColor">#ffd536</color>-->
 </resources>

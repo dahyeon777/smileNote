@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         binding.rv.layoutManager = LinearLayoutManager(this)
 
         // ViewModel에서 데이터 변경 감지
-        memoViewModel.getAllMemos().observe(this, Observer { memos ->
+        memoViewModel.getAllMemosReverseOrder().observe(this, Observer { memos ->
             itemList.clear()
             memos?.let {
                 itemList.addAll(it.map { memo ->
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
     // 초기 메모 생성 메서드
     private fun createInitialMemo() {
         val initialMemo = Memo(
-            title = "새 메모를 작성하세요",
+            title = "새 메모를 작성하세요.",
             content = "메모를 길게 눌러 삭제하세요.",
             date = "2024-06-19",
             time = "13:51"

@@ -19,8 +19,8 @@ class MemoViewModel(application: Application) : AndroidViewModel(application) {
 
     }
 
-    fun getAllMemos(): LiveData<List<Memo>> {
-        return memoRepository.getAllMemos()
+    fun getAllMemosReverseOrder(): LiveData<List<Memo>> {
+        return memoRepository.getAllMemosReverseOrder()
     }
 
     fun insertMemo(memo: Memo) {

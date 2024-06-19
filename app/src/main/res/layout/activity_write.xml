@@ -8,11 +8,10 @@
         android:background="#ffffff"
         tools:context=".WriteActivity">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="40dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -22,20 +21,25 @@
             <EditText
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:background="#ffffff"
-                android:hint="제목을 입력하세요"
-                android:padding="10dp"
+                android:hint="제목"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:textColor="@color/textColor"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="5dp"
+                android:layout_height="1.5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:background="#E3E3E3"
                 tools:ignore="MissingConstraints" />
 
@@ -43,12 +47,13 @@
                 android:id="@+id/contentTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
                 android:background="#ffffff"
-                android:hint="글을 작성하세요"
-                android:padding="10dp"
+                android:textColor="@color/textColor"
+                android:hint="글을 작성하세요."
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,15 +63,18 @@
 
         <Button
             android:id="@+id/saveBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="10dp"
             android:background="@color/pointColor"
             android:textColor="@color/white"
+            android:textSize="14sp"
+            android:textStyle="bold"
             android:text="저장하기"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
