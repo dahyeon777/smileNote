@@ -12,9 +12,11 @@ class MemoViewModel(application: Application) : AndroidViewModel(application) {
 
     private val memoRepository: MemoRepository
 
+
     init {
         val memoDao = AppDatabase.getDatabase(application)?.MemoDAO()
         memoRepository = memoDao?.let { MemoRepository(it) }!!
+
     }
 
     fun getAllMemos(): LiveData<List<Memo>> {

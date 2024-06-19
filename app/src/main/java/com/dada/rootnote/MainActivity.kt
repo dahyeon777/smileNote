@@ -55,6 +55,20 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, WriteActivity::class.java)
             startActivity(intent)
         }
+
+        // 앱 실행 시 초기 메모 생성
+        createInitialMemo()
+    }
+
+    // 초기 메모 생성 메서드
+    private fun createInitialMemo() {
+        val initialMemo = Memo(
+            title = "새 메모를 작성하세요",
+            content = "메모를 길게 눌러 삭제하세요.",
+            date = "2024-06-19",
+            time = "13:51"
+        )
+        memoViewModel.insertMemo(initialMemo)
     }
 
     // RecyclerView의 항목을 클릭했을 때의 동작
@@ -66,13 +80,12 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    // 삭제 다이얼로그 표시
+    // 메모 삭제 다이얼로그 표시
     private fun showDeleteConfirmationDialog(item: BoardItem) {
         AlertDialog.Builder(this)
             .setTitle("메모삭제")
             .setMessage("메모를 삭제하시겠습니까?")
             .setPositiveButton("예") { dialog, which ->
-                // 삭제 동작 처리
                 deleteMemo(item)
             }
             .setNegativeButton("아니오") { dialog, which ->
