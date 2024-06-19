@@ -20,4 +20,7 @@ interface MemoDAO {
 
     @Query("SELECT * FROM memo WHERE id = :memoId")
     fun getMemoById(memoId: Long): LiveData<Memo?>
+
+    @Query("DELETE FROM memo WHERE id = :memoId")
+    fun deleteMemoById(memoId: Long)
 }

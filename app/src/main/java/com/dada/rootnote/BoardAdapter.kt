@@ -6,11 +6,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class BoardAdapter(val itemList: ArrayList<BoardItem>, private val onItemClick: (BoardItem) -> Unit) :
-    RecyclerView.Adapter<BoardAdapter.BoardViewHolder>() {
+class BoardAdapter(
+    private val itemList: List<BoardItem>,
+    private val onItemClicked: (BoardItem) -> Unit,
+    private val onItemLongClicked: (BoardItem) -> Unit
+) : RecyclerView.Adapter<BoardAdapter.BoardViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recycle_view, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_recycle_view, parent, false)
         return BoardViewHolder(view)
     }
 
@@ -22,8 +26,15 @@ class BoardAdapter(val itemList: ArrayList<BoardItem>, private val onItemClick: 
         holder.content.text = item.content
         holder.time.text = item.time
 
+        // 짧게 클릭한 경우의 이벤트 처리
         holder.itemView.setOnClickListener {
-            onItemClick(item)
+            onItemClicked(item)
+        }
+
+        // 길게 클릭한 경우의 이벤트 처리
+        holder.itemView.setOnLongClickListener {
+            onItemLongClicked(item)
+            true // true를 반환하여 이벤트 처리 완료를 나타냄
         }
     }
 

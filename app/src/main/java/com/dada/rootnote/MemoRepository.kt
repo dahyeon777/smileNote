@@ -11,4 +11,8 @@ class MemoRepository(private val memoDao: MemoDAO) {
     fun insertMemo(memo: Memo) {
         memoDao.insertMemos(memo)
     }
+
+    fun deleteMemoById(memoId: Long) {
+        memoDao.deleteMemoById(memoId)
+    }
 }

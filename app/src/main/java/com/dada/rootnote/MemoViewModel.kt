@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class MemoViewModel(application: Application) : AndroidViewModel(application) {
@@ -25,4 +26,11 @@ class MemoViewModel(application: Application) : AndroidViewModel(application) {
             memoRepository.insertMemo(memo)
         }
     }
+
+    fun deleteMemoById(memoId: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            memoRepository.deleteMemoById(memoId)
+        }
+    }
+
 }

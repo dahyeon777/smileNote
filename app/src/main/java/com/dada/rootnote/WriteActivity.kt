@@ -6,18 +6,20 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.dada.rootnote.AppDatabase
+import com.dada.rootnote.Memo
+import com.dada.rootnote.R
 import com.dada.rootnote.databinding.ActivityWriteBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
-import kotlin.properties.Delegates
 
 class WriteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityWriteBinding
-    private var memoId by Delegates.notNull<Long>()
+    private var memoId: Long = 0
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,9 +48,10 @@ class WriteActivity : AppCompatActivity() {
         val minute = currentLocalTime.minute
         val timeText = String.format("%02d:%02d", hour, minute)
         val localDate: LocalDate = LocalDate.now()
+        val dateText = localDate.toString()
+
         val titleText = binding.titleTextView.text.toString()
         val contentText = binding.contentTextView.text.toString()
-        val dateText = localDate.toString()
 
         val memo = Memo(title = titleText, content = contentText, date = dateText, time = timeText)
 
@@ -58,11 +61,11 @@ class WriteActivity : AppCompatActivity() {
         if (memoId == 0L) {
             // 새 메모 저장
             GlobalScope.launch(Dispatchers.IO) {
-                memoDao?.insertMemos(memo)
+                val newMemoId = memoDao?.insertMemos(memo) // 새로 추가된 메모의 ID를 받아옴
             }
         } else {
             // 기존 메모 업데이트
-            memo.id = memoId.toLong()
+            memo.id = memoId
             GlobalScope.launch(Dispatchers.IO) {
                 memoDao?.updateMemos(memo)
             }
