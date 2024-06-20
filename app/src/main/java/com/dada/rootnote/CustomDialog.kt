@@ -16,7 +16,7 @@ class CustomDialog(private val title: String, private val content: String) : Dia
         val view = binding.root
 
         // 다이얼로그 바깥을 클릭해도 닫히지 않도록 설정 (선택 사항)
-        isCancelable = false
+        isCancelable = true
 
         return view
     }
