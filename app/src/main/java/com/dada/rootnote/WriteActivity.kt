@@ -1,7 +1,6 @@
 package com.dada.rootnote
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +18,7 @@ class WriteActivity : AppCompatActivity(), OnEmotionSelectedListener {
 
     private lateinit var binding: ActivityWriteBinding
     private var memoId: Long = 0
+    private var emotion = 1
 
     @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -57,10 +57,13 @@ class WriteActivity : AppCompatActivity(), OnEmotionSelectedListener {
         val localDate: LocalDate = LocalDate.now()
         val dateText = localDate.toString()
 
+
         val titleText = binding.titleTextView.text.toString()
         val contentText = binding.contentTextView.text.toString()
 
-        val memo = Memo(title = titleText, content = contentText, date = dateText, time = timeText)
+        val memo = Memo(
+            title = titleText, content = contentText, date = dateText
+            , time = timeText, emotion = emotion)
 
         val db = AppDatabase.getDatabase(applicationContext)
         val memoDao = db?.MemoDAO()
@@ -85,21 +88,27 @@ class WriteActivity : AppCompatActivity(), OnEmotionSelectedListener {
         when (emotionNumber) {
             1 -> {
                 binding.emotionBtn.setImageResource(R.drawable.angry)
+                emotion = 1
             }
             2 -> {
                 binding.emotionBtn.setImageResource(R.drawable.normal)
+                emotion = 2
             }
             3 -> {
                 binding.emotionBtn.setImageResource(R.drawable.happy)
+                emotion = 3
             }
             4 -> {
                 binding.emotionBtn.setImageResource(R.drawable.bad)
+                emotion = 4
             }
             5 -> {
                 binding.emotionBtn.setImageResource(R.drawable.sad)
+                emotion = 5
             }
             else -> {
-                // emotionNumber가 1부터 5 사이의 값이 아닌 경우 처리할 내용
+                binding.emotionBtn.setImageResource(R.drawable.plus)
+                emotion = 0
             }
         }
     }

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             itemList.clear()
             memos?.let {
                 itemList.addAll(it.map { memo ->
-                    BoardItem(memo.id, memo.title, memo.date, memo.content, memo.time)
+                    BoardItem(memo.id, memo.title, memo.date, memo.content, memo.time, memo.emotion)
                 })
                 boardAdapter.notifyDataSetChanged()
             }
@@ -66,7 +66,8 @@ class MainActivity : AppCompatActivity() {
             title = "새 메모를 작성하세요.",
             content = "메모를 길게 눌러 삭제하세요.",
             date = "2024-06-19",
-            time = "13:51"
+            time = "13:51",
+            emotion = 3
         )
         memoViewModel.insertMemo(initialMemo)
     }
@@ -77,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("memoId", clickedItem.id) // 메모 ID 전달
         intent.putExtra("title", clickedItem.title)
         intent.putExtra("content", clickedItem.content)
+        intent.putExtra("emotion",clickedItem.emotion)
         startActivity(intent)
     }
 

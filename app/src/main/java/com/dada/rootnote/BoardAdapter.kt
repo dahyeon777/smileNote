@@ -3,6 +3,7 @@ package com.dada.rootnote
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -26,6 +27,21 @@ class BoardAdapter(
         holder.content.text = item.content
         holder.time.text = item.time
 
+        // 감정 상태에 따라 이미지 설정
+        item.emotion?.let { emotion ->
+            when (emotion) {
+                1 -> holder.emotionImage.setImageResource(R.drawable.angry)
+                2 -> holder.emotionImage.setImageResource(R.drawable.normal)
+                3 -> holder.emotionImage.setImageResource(R.drawable.happy)
+                4 -> holder.emotionImage.setImageResource(R.drawable.bad)
+                5 -> holder.emotionImage.setImageResource(R.drawable.sad)
+                else -> {
+                    // 기본적으로 설정할 이미지가 있는 경우
+                    holder.emotionImage.setImageResource(R.drawable.blank)
+                }
+            }
+        }
+
         // 짧게 클릭한 경우의 이벤트 처리
         holder.itemView.setOnClickListener {
             onItemClick(item)
@@ -38,6 +54,7 @@ class BoardAdapter(
         }
     }
 
+
     override fun getItemCount(): Int {
         return itemList.size
     }
@@ -47,5 +64,8 @@ class BoardAdapter(
         val date: TextView = itemView.findViewById(R.id.item_date)
         val content: TextView = itemView.findViewById(R.id.item_content)
         val time: TextView = itemView.findViewById(R.id.item_time)
+        val emotionImage: ImageView = itemView.findViewById(R.id.item_emotion)
     }
+
+
 }
