@@ -39,6 +39,11 @@ class WriteActivity : AppCompatActivity() {
         binding.saveBtn.setOnClickListener {
             saveOrUpdateMemo()
         }
+
+        binding.emotionBtn.setOnClickListener {
+            val customDialog = CustomDialog("제목", "내용")
+            customDialog.show(supportFragmentManager, "CustomDialog")
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
