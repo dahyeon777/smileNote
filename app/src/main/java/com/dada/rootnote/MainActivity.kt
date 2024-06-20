@@ -55,6 +55,11 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, WriteActivity::class.java)
             startActivity(intent)
         }
+        // 작성 버튼 클릭 시 ChartActivity로 이동
+        binding.chartGoBtn.setOnClickListener{
+            val intent = Intent(this, ChartActivity::class.java)
+            startActivity(intent)
+        }
 
         // 앱 실행 시 초기 메모 생성
         createInitialMemo()
