@@ -1,14 +1,13 @@
 package com.dada.rootnote
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.dada.rootnote.AppDatabase
-import com.dada.rootnote.Memo
-import com.dada.rootnote.R
 import com.dada.rootnote.databinding.ActivityWriteBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -16,11 +15,12 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.LocalTime
 
-class WriteActivity : AppCompatActivity() {
+class WriteActivity : AppCompatActivity(), OnEmotionSelectedListener {
 
     private lateinit var binding: ActivityWriteBinding
     private var memoId: Long = 0
 
+    @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +40,10 @@ class WriteActivity : AppCompatActivity() {
             saveOrUpdateMemo()
         }
 
+        // 감정 버튼 클릭 시
         binding.emotionBtn.setOnClickListener {
             val customDialog = CustomDialog("제목", "내용")
+            customDialog.setOnEmotionSelectedListener(this) // WriteActivity 자체를 listener로 설정
             customDialog.show(supportFragmentManager, "CustomDialog")
         }
     }
@@ -77,5 +79,28 @@ class WriteActivity : AppCompatActivity() {
         }
 
         finish()
+    }
+
+    override fun onEmotionSelected(emotionNumber: Int) {
+        when (emotionNumber) {
+            1 -> {
+                binding.emotionBtn.setImageResource(R.drawable.angry)
+            }
+            2 -> {
+                binding.emotionBtn.setImageResource(R.drawable.normal)
+            }
+            3 -> {
+                binding.emotionBtn.setImageResource(R.drawable.happy)
+            }
+            4 -> {
+                binding.emotionBtn.setImageResource(R.drawable.bad)
+            }
+            5 -> {
+                binding.emotionBtn.setImageResource(R.drawable.sad)
+            }
+            else -> {
+                // emotionNumber가 1부터 5 사이의 값이 아닌 경우 처리할 내용
+            }
+        }
     }
 }

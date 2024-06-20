@@ -24,33 +24,43 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             >
-            <ImageView
+            <ImageButton
+                android:id="@+id/angry"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:background="#ffffff"
                 android:layout_weight="1"
                 android:src="@drawable/angry"
                 android:scaleType="fitCenter"/>
-            <ImageView
+            <ImageButton
+                android:id="@+id/normal"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:background="#ffffff"
                 android:layout_weight="1"
                 android:src="@drawable/normal"
                 android:scaleType="fitCenter"/>
-            <ImageView
+            <ImageButton
+                android:id="@+id/happy"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:background="#ffffff"
                 android:layout_weight="1"
                 android:src="@drawable/happy"
                 android:scaleType="fitCenter"/>
-            <ImageView
+            <ImageButton
+                android:id="@+id/bad"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:background="#ffffff"
                 android:layout_weight="1"
                 android:src="@drawable/bad"
                 android:scaleType="fitCenter"/>
-            <ImageView
+            <ImageButton
+                android:id="@+id/sad"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
+                android:background="#ffffff"
                 android:layout_weight="1"
                 android:src="@drawable/sad"
                 android:scaleType="fitCenter"/>
