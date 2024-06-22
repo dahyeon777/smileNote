@@ -19,6 +19,10 @@ class WriteActivity : AppCompatActivity(), OnEmotionSelectedListener {
     private lateinit var binding: ActivityWriteBinding
     private var memoId: Long = 0
     private var emotion = 0
+    @RequiresApi(Build.VERSION_CODES.O)
+    private val localDate: LocalDate = LocalDate.now()
+    @RequiresApi(Build.VERSION_CODES.O)
+    private val dateText = localDate.toString()
 
     @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -30,27 +34,29 @@ class WriteActivity : AppCompatActivity(), OnEmotionSelectedListener {
         memoId = intent.getLongExtra("memoId", 0)
         val title = intent.getStringExtra("title")
         val content = intent.getStringExtra("content")
+        val date = intent.getStringExtra("date")
+        val time = intent.getStringExtra("time")
         emotion = intent.getIntExtra("emotion",0)
 
         // 받아온 데이터가 있다면 UI에 설정
         title?.let { binding.titleTextView.setText(it) }
         content?.let { binding.contentTextView.setText(it) }
-        emotion?.let { value ->
-            val imageResource = when (value) {
-                1 -> R.drawable.angry
-                2 -> R.drawable.normal
-                3 -> R.drawable.happy
-                4 -> R.drawable.bad
-                5 -> R.drawable.sad
-                else -> R.drawable.plus // 기본 이미지 (값이 1~5가 아닐 때)
-            }
-            binding.emotionBtn.setImageResource(imageResource)
-        }
+        date?.let { binding.dateTextWrite.setText(it) }
 
+        // emotion 값에 따라 이미지 설정
+        val imageResource = when (emotion) {
+            1 -> R.drawable.angry
+            2 -> R.drawable.normal
+            3 -> R.drawable.happy
+            4 -> R.drawable.bad
+            5 -> R.drawable.sad
+            else -> R.drawable.plus
+        }
+        binding.emotionBtn.setImageResource(imageResource)
 
         // 저장 버튼 클릭 시
         binding.saveBtn.setOnClickListener {
-            saveOrUpdateMemo()
+            saveOrUpdateMemo(time)
         }
 
         // 감정 버튼 클릭 시
@@ -62,20 +68,20 @@ class WriteActivity : AppCompatActivity(), OnEmotionSelectedListener {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun saveOrUpdateMemo() {
-        val currentLocalTime: LocalTime = LocalTime.now()
-        val hour = currentLocalTime.hour
-        val minute = currentLocalTime.minute
-        val timeText = String.format("%02d:%02d", hour, minute)
-        val localDate: LocalDate = LocalDate.now()
-        val dateText = localDate.toString()
-
+    private fun saveOrUpdateMemo(originalTime: String?) {
+        // 만약 originalTime이 null이 아니면 그 값을 사용하고, null이면 현재 시간을 사용
+        val timeText = originalTime ?: run {
+            val currentLocalTime: LocalTime = LocalTime.now()
+            val hour = currentLocalTime.hour
+            val minute = currentLocalTime.minute
+            String.format("%02d:%02d", hour, minute)
+        }
 
         val titleText = binding.titleTextView.text.toString()
         val contentText = binding.contentTextView.text.toString()
 
         val memo = Memo(
-            title = titleText, content = contentText, date = dateText
+            title = titleText, content = contentText, date = binding.dateTextWrite.text.toString()
             , time = timeText, emotion = emotion)
 
         val db = AppDatabase.getDatabase(applicationContext)
@@ -84,7 +90,7 @@ class WriteActivity : AppCompatActivity(), OnEmotionSelectedListener {
         if (memoId == 0L) {
             // 새 메모 저장
             GlobalScope.launch(Dispatchers.IO) {
-                val newMemoId = memoDao?.insertMemos(memo) // 새로 추가된 메모의 ID를 받아옴
+                memoDao?.insertMemos(memo)
             }
         } else {
             // 기존 메모 업데이트

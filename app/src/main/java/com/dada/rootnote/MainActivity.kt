@@ -84,6 +84,8 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("title", clickedItem.title)
         intent.putExtra("content", clickedItem.content)
         intent.putExtra("emotion",clickedItem.emotion)
+        intent.putExtra("date",clickedItem.date)
+        intent.putExtra("time",clickedItem.time)
         startActivity(intent)
     }
 
