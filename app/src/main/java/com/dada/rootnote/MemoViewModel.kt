@@ -19,7 +19,6 @@ class MemoViewModel(application: Application) : AndroidViewModel(application) {
     val countEmotion4: LiveData<Int>
     val countEmotion5: LiveData<Int>
 
-
     init {
         val memoDao = AppDatabase.getDatabase(application)?.MemoDAO()
         memoRepository = memoDao?.let { MemoRepository(it) }!!

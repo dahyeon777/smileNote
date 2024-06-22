@@ -3,22 +3,23 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="20dp"
-        android:background="#ffffff"
+        android:background="@color/pointColor"
         android:orientation="vertical">
 
         <!-- 첫 번째 게이지 바 -->
         <CalendarView
             android:id="@+id/calendarView"
-            android:layout_marginTop="40dp"
+            android:background="#ffffff"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center"
-                    android:max="100" />
+                    android:max="31" />
 
                 <TextView
                     android:id="@+id/percentage1"
@@ -45,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingStart="8dp"
-                    android:text="0%"
+                    android:text="0"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -67,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:max="100" />
+                    android:max="31" />
 
                 <TextView
                     android:id="@+id/percentage2"
@@ -75,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingStart="8dp"
-                    android:text="0%"
+                    android:text="0"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -97,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:max="100" />
+                    android:max="31" />
 
                 <TextView
                     android:id="@+id/percentage3"
@@ -105,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingStart="8dp"
-                    android:text="0%"
+                    android:text="0"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -127,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:max="100" />
+                    android:max="31" />
 
                 <TextView
                     android:id="@+id/percentage4"
@@ -135,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingStart="8dp"
-                    android:text="0%"
+                    android:text="0"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -157,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:max="100" />
+                    android:max="31" />
 
                 <TextView
                     android:id="@+id/percentage5"
@@ -165,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingStart="8dp"
-                    android:text="0%"
+                    android:text="0"
                     android:textSize="16sp" />
             </LinearLayout>
 
