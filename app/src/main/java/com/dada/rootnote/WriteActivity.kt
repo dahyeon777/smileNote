@@ -18,7 +18,7 @@ class WriteActivity : AppCompatActivity(), OnEmotionSelectedListener {
 
     private lateinit var binding: ActivityWriteBinding
     private var memoId: Long = 0
-    private var emotion = 1
+    private var emotion = 0
 
     @SuppressLint("ResourceType")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -30,10 +30,23 @@ class WriteActivity : AppCompatActivity(), OnEmotionSelectedListener {
         memoId = intent.getLongExtra("memoId", 0)
         val title = intent.getStringExtra("title")
         val content = intent.getStringExtra("content")
+        emotion = intent.getIntExtra("emotion",0)
 
         // 받아온 데이터가 있다면 UI에 설정
         title?.let { binding.titleTextView.setText(it) }
         content?.let { binding.contentTextView.setText(it) }
+        emotion?.let { value ->
+            val imageResource = when (value) {
+                1 -> R.drawable.angry
+                2 -> R.drawable.normal
+                3 -> R.drawable.happy
+                4 -> R.drawable.bad
+                5 -> R.drawable.sad
+                else -> R.drawable.plus // 기본 이미지 (값이 1~5가 아닐 때)
+            }
+            binding.emotionBtn.setImageResource(imageResource)
+        }
+
 
         // 저장 버튼 클릭 시
         binding.saveBtn.setOnClickListener {
