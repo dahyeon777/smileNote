@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/pointColor"
         android:orientation="vertical">
 
-        <!-- 첫 번째 게이지 바 -->
-        <CalendarView
-            android:id="@+id/calendarView"
-            android:background="#ffffff"
-            android:layout_marginTop="50dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
             android:background="#ffffff"
             android:orientation="vertical"
             android:padding="20dp">
@@ -24,6 +18,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
                 android:orientation="horizontal">
 
                 <ImageView
